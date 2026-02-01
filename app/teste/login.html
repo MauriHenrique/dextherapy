@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | DexTherapy</title>
+    <link rel="stylesheet" href="/app/style/styles.css">
+</head>
+<body>
+
+    <div class="login-wrapper">
+        <div class="login-side-image">
+            <div class="image-overlay">
+                <img src="https://grupodinamicasaude.com.br/wp-content/uploads/2025/11/c0719119-35b7-4068-b435-ea3c7da4df6e-e1764279444516.png" alt="Logo Dinâmica">
+            </div>
+        </div>
+
+        <div class="login-side-form">
+            <div class="login-content">
+                <header>
+                    <h1>Bem-vindo ao DexTherapy</h1>
+                    <p>Acesse sua plataforma de exercícios personalizados.</p>
+                </header>
+
+                <form id="loginForm">
+                    <div class="field-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" placeholder="seu@email.com" required>
+                    </div>
+
+                    <div class="field-group">
+                        <label for="password">Senha</label>
+                        <input type="password" id="password" placeholder="••••••••" required>
+                    </div>
+
+                    <div class="form-actions">
+                        <!-- <button type="submit" class="btn-submit">Entrar</button> -->
+                         <button type="button" class="btn-submit" onclick="window.location.href='dashboard.html'">Entrar</button>
+                        <a href="https://wa.me/5521985571239" class="btn-help" target="_blank">Esqueci minha senha</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+</body>
+</html>

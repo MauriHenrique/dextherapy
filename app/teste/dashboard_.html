@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | DexTherapy</title>
+    <link rel="stylesheet" href="/app/style/styles.css">
+</head>
+<body class="dashboard-body">
+
+    <input type="checkbox" id="menu-toggle" class="menu-checkbox">
+
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <img src="https://grupodinamicasaude.com.br/wp-content/uploads/2025/11/c0719119-35b7-4068-b435-ea3c7da4df6e-e1764279444516.png" alt="Logo">
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-item active"><i>🏠</i> Início</a>
+            <a href="#" class="nav-item"><i>💪</i> Meus Exercícios</a>
+            <a href="#" class="nav-item"><i>📅</i> Agendamentos</a>
+            <a href="#" class="nav-item"><i>👤</i> Meu Perfil</a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button class="btn-logout">Sair</button>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="top-bar">
+            <label for="menu-toggle" class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+            <div class="user-info">Olá, <strong>Paciente</strong></div>
+        </header>
+
+        <section class="content-body">
+            <h1 class="page-title">Meus Exercícios</h1>
+            
+            <div class="video-grid">
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/wfLO5YODDxY" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3>Mobilidade de Punho</h3>
+                        <p>3 séries de 10 repetições</p>
+                    </div>
+                </div>
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/wfLO5YODDxY" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3>Fortalecimento de Dedos</h3>
+                        <p>2 séries de 15 repetições</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <label for="menu-toggle" class="menu-overlay"></label>
+
+</body>
+</html>

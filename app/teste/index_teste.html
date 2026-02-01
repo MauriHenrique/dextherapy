@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste de CSS - Página de Cadastro</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+    <div class="registration-container">
+        <header>
+            <h1>Criar Conta</h1>
+            <p>Preencha os campos abaixo para testar seu design.</p>
+        </header>
+
+        <form action="#" method="post">
+            
+            <fieldset>
+                <legend>Informações Pessoais</legend>
+                
+                <div class="field-group">
+                    <label for="nome">Nome Completo</label>
+                    <input type="text" id="nome" name="nome" placeholder="Ex: João Silva" required>
+                </div>
+
+                <div class="field-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" placeholder="email@exemplo.com" required>
+                </div>
+
+                <div class="field-row">
+                    <div class="field-group">
+                        <label for="senha">Senha</label>
+                        <input type="password" id="senha" name="senha" required>
+                    </div>
+                    <div class="field-group">
+                        <label for="data-nascimento">Data de Nascimento</label>
+                        <input type="date" id="data-nascimento" name="data-nascimento">
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Preferências e Perfil</legend>
+
+                <div class="field-group">
+                    <label for="genero">Gênero</label>
+                    <select id="genero" name="genero">
+                        <option value="">Selecione...</option>
+                        <option value="masculino">Masculino</option>
+                        <option value="feminino">Feminino</option>
+                        <option value="outro">Outro</option>
+                        <option value="n-declarar">Prefiro não declarar</option>
+                    </select>
+                </div>
+
+                <div class="field-group">
+                    <label>Tipo de Plano</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="plano" value="gratis" checked> Gratuito
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="plano" value="premium"> Premium
+                        </label>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Adicionais</legend>
+                
+                <div class="field-group">
+                    <label for="bio">Biografia / Observações</label>
+                    <textarea id="bio" name="bio" rows="4" placeholder="Conte um pouco sobre você..."></textarea>
+                </div>
+
+                <div class="field-group">
+                    <label for="avatar">Foto de Perfil</label>
+                    <input type="file" id="avatar" name="avatar">
+                </div>
+            </fieldset>
+
+            <div class="checkbox-group">
+                <label>
+                    <input type="checkbox" name="termos" required> 
+                    Eu aceito os <a href="#">Termos e Condições</a>
+                </label>
+                <label>
+                    <input type="checkbox" name="newsletter"> 
+                    Desejo receber novidades por e-mail
+                </label>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn-submit">Cadastrar</button>
+                <button type="reset" class="btn-reset">Limpar Tudo</button>
+            </div>
+
+        </form>
+    </div>
+
+</body>
+</html>

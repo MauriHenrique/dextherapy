@@ -1,0 +1,675 @@
+/* ==========================================================================
+   1. VARIÁVEIS E CONFIGURAÇÕES GLOBAIS
+   ========================================================================== */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+   :root {
+    --lilas-principal: #9b59b6;/*#2d323e;*/
+    --lilas-menu: #4d2c5a;
+    --lilas-foco: #fdfaff;
+    --verde-saude: #1abc9c;
+    --branco: #ffffff;
+    --texto-escuro: #2c3e50;
+    --texto-suave: #95a5a6;
+    --erro: #e74c3c;
+    --borda-raio: 15px;
+    --sombra: 0 4px 12px rgba(0,0,0,0.08);
+    --fonte-principal: 'Poppins', sans-serif;
+}
+
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    /* font-family: 'Segoe UI', Roboto, sans-serif;  */
+    font-family: var(--fonte-principal);
+}
+
+/* Para a tela de Login (adicionar class="no-scroll" no body) */
+body.no-scroll { 
+    height: 100vh; 
+    width: 100vw; 
+    overflow: hidden; 
+}
+
+body { 
+    background-color: var(--branco); 
+    color: var(--texto-escuro); 
+    min-height: 100vh;
+}
+
+
+
+/* ==========================================================================
+   2. TELA DE LOGIN (ESTRUTURA E BLUR)
+   ========================================================================== */
+.login-wrapper {
+    display: flex;
+    flex-direction: column; /* Mobile: Imagem no topo */
+    height: 100vh;
+}
+
+.login-side-image {
+    flex: 0 0 25%; /* Banner compacto no mobile */
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    order: -1; 
+    border-bottom: 3px solid var(--lilas-principal);
+}
+
+/* Camada de Blur (Impedindo que afete o Logo) */
+.login-side-image::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url('/app/assets/images/background.avif?auto=format&fit=crop&q=80&w=1000');
+    background-size: cover;
+    background-position: center;
+    filter: blur(4px); /* Desfoque leve */
+    transform: scale(1.1); /* Compensa as bordas do blur */
+    z-index: 1;
+}
+
+.image-overlay {
+    position: relative;
+    z-index: 2; /* Logo fica nítido à frente */
+    background: rgba(155, 89, 182, 0.2);
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+}
+
+.image-overlay img { max-width: 120px; filter: brightness(0) invert(1); }
+
+.login-side-form {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 30px 24px;
+    overflow-y: auto;
+}
+
+.login-content { width: 100%; max-width: 380px; padding-top: 10px; }
+
+/* ==========================================================================
+   3. FORMULÁRIO E COMPONENTES
+   ========================================================================== */
+header h1 { color: var(--lilas-principal); font-size: 1.2rem; font-weight: 700; margin-bottom: 5px; }
+header p { color: var(--texto-suave); font-size: 0.8rem; margin-bottom: 20px; }
+
+.field-group { margin-bottom: 15px; }
+label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.85rem; }
+
+input {
+    width: 100%; padding: 12px 16px; border: 1.5px solid #eee;
+    border-radius: var(--borda-raio); font-size: 1rem; transition: all 0.2s;
+}
+
+input:focus { outline: none; border-color: var(--lilas-principal); background: var(--lilas-foco); }
+
+.btn-submit {
+    background-color: var(--verde-saude); color: white; padding: 15px;
+    border: none; border-radius: var(--borda-raio); font-weight: 700; width: 100%;
+    cursor: pointer; box-shadow: 0 4px 10px rgba(46, 204, 113, 0.2);
+}
+
+.btn-help {
+    display: block; text-align: center; margin-top: 20px;
+    color: var(--texto-suave); text-decoration: none; font-size: 0.8rem;
+}
+
+.btn-logout {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: transparent; /* Remove o fundo cinza padrão */
+    color: white; /* Texto branco */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Borda fina e discreta */
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.btn-logout:hover {
+    background: rgba(255, 255, 255, 0.1); /* Brilho sutil ao passar o mouse */
+    border-color: white;
+}
+
+/* ==========================================================================
+   4. DASHBOARD E VÍDEOS
+   ========================================================================== */
+.dash-header {
+    background-color: var(--lilas-principal);
+    padding: 15px 20px; display: flex; justify-content: space-between; align-items: center;
+    position: sticky; top: 0; z-index: 100;
+}
+
+.dash-header img { max-height: 40px; filter: brightness(0) invert(1); }
+
+.container { padding: 20px; max-width: 1000px; margin: 0 auto; }
+
+.title { text-align: center; margin-bottom: 20px; font-size: 1.4rem; font-weight: 700; color: var(--lilas-principal); }
+
+.video-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+.video-card { background: var(--branco); border-radius: var(--borda-raio); overflow: hidden; box-shadow: var(--sombra); }
+.video-wrapper { position: relative; padding-top: 56.25%; background: #000; }
+.video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+.video-info { padding: 15px; }
+.video-title { font-size: 1rem; font-weight: 600; }
+
+/* Bloqueio Inativo */
+.lock-card { background: var(--branco); padding: 40px 20px; border-radius: var(--borda-raio); text-align: center; box-shadow: var(--sombra); margin-top: 40px; }
+.btn-whatsapp {
+    display: inline-block; background-color: #25d366; color: white; padding: 16px 25px;
+    border-radius: var(--borda-raio); text-decoration: none; font-weight: bold; margin-top: 20px;
+}
+
+.hidden { display: none !important; }
+
+/* ==========================================================================
+   5. AJUSTES DESKTOP (800px+)
+   ========================================================================== */
+@media (min-width: 800px) {
+    .login-wrapper { flex-direction: row; }
+    
+    .login-side-image {
+        order: 1; /* Imagem na DIREITA no desktop */
+        flex: 1.2;
+        height: 100vh;
+        border-bottom: none;
+    }
+
+    .login-side-form {
+        flex: 1;
+        height: 100vh;
+        align-items: center; /* Centraliza o form no desktop */
+        padding: 40px;
+    }
+
+    .video-grid { grid-template-columns: repeat(3, 1fr); }
+    header h1 { font-size: 1.8rem; }
+    .image-overlay img { max-width: 180px; }
+}
+
+
+/* ==========================================================================
+   DASHBOARD - LAYOUT COM SIDEBAR
+   ========================================================================== */
+
+/* Esconde o checkbox do controle do menu */
+.menu-checkbox { display: none; }
+
+.dashboard-body {
+    display: flex;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* SIDEBAR (MENU LATERAL) */
+.sidebar {
+    position: fixed;
+    left: -260px; /* Escondido por padrão no mobile */
+    top: 0;
+    width: 260px;
+    height: 100%;
+    background-color: var(--lilas-menu);
+    color: white;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 4px 0 10px rgba(0,0,0,0.1);
+}
+
+.sidebar-header { padding: 30px 20px; text-align: center; }
+.sidebar-header img { width: 140px; filter: brightness(0) invert(1); }
+
+.sidebar-nav { flex: 1; padding: 10px 0; }
+.nav-item {
+    display: block;
+    padding: 15px 25px;
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+.nav-item:hover, .nav-item.active {
+    background: rgba(255,255,255,0.1);
+    color: white;
+    border-left: 4px solid var(--verde-saude);
+}
+
+.sidebar-footer { padding: 20px; border-top: 1px solid rgba(255,255,255,0.1); }
+
+/* CONTEÚDO PRINCIPAL */
+.main-content {
+    flex: 1;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.top-bar {
+    height: 70px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    
+    /* MÁGICA PARA FICAR FLUTUANTE */
+    position: sticky;
+    top: 0;
+    z-index: 900; /* Fica acima do conteúdo, mas abaixo da sidebar aberta */
+}
+
+/* BOTÃO HAMBÚRGUER */
+.hamburger {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background: var(--lilas-principal);
+    border-radius: 2px;
+}
+
+/* LÓGICA DE ABERTURA (MOBILE) */
+.menu-checkbox:checked ~ .sidebar { left: 0; }
+.menu-checkbox:checked ~ .menu-overlay {
+    display: block;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.4);
+    z-index: 999;
+}
+
+/* CONTEÚDO E VÍDEOS */
+.content-body { padding: 25px; }
+.page-title { margin-bottom: 25px; color: var(--lilas-principal); font-size: 1.5rem; }
+
+/* Garantia para o mobile */
+@media (max-width: 800px) {
+    .main-content {
+        display: block;
+        height: auto;
+    }
+}
+
+.video-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* 1 coluna no mobile */
+    gap: 20px;
+}
+
+.video-card {
+    background: white;
+    border-radius: var(--borda-raio);
+    overflow: hidden;
+    box-shadow: var(--sombra);
+}
+
+.video-wrapper { position: relative; padding-top: 56.25%; background: #000; }
+.video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+.video-info { padding: 15px; }
+.video-info h3 { font-size: 1rem; margin-bottom: 5px; }
+.video-info p { color: var(--texto-suave); font-size: 0.85rem; }
+
+/* ==========================================================================
+   RESPONSIVIDADE DESKTOP (800px+)
+   ========================================================================== */
+@media (min-width: 800px) {
+    .sidebar { 
+        left: 0; 
+        
+    } /* Sempre visível */
+    .main-content { margin-left: 260px; } /* Empurra o conteúdo para o lado */
+    .hamburger { display: none; } /* Esconde o botão hambúrguer */
+    .menu-overlay { display: none !important; }
+    
+    .video-grid { grid-template-columns: repeat(3, 1fr); } /* 2 colunas */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   REFINAMENTO DA TELA DE PERFIL
+   ========================================================================== */
+
+.profile-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Hero Section - Identidade */
+.profile-hero {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    background: white;
+    padding: 40px;
+    border-radius: var(--borda-raio);
+    box-shadow: var(--sombra);
+    margin-bottom: 30px;
+}
+
+.avatar-large {
+    width: 90px;
+    height: 90px;
+    background: var(--cor-menu-fundo); /* O tom #4d2c5a */
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 2rem;
+    font-weight: bold;
+    border: 4px solid var(--lilas-foco);
+}
+
+.hero-text h1 { font-size: 1.8rem; color: var(--texto-escuro); margin-bottom: 5px; }
+
+.status-tag {
+    background: #e8f5e9;
+    color: var(--verde-destaque);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+/* Grid de Informações */
+.profile-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+.profile-section {
+    background: white;
+    padding: 30px;
+    border-radius: var(--borda-raio);
+    box-shadow: var(--sombra);
+}
+
+.section-header {
+    margin-bottom: 25px;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 10px;
+}
+
+.section-header h3 { color: var(--cor-menu-fundo); font-size: 1.1rem; }
+
+/* Estilo para dados apenas leitura (mais limpo que inputs) */
+.info-item { margin-bottom: 20px; }
+.info-item label { font-size: 0.75rem; color: var(--texto-suave); text-transform: uppercase; letter-spacing: 1px; }
+.info-item p { font-weight: 600; color: var(--texto-escuro); margin-top: 5px; font-size: 1rem; }
+
+/* Botão de Salvar mais específico */
+.btn-save {
+    background: var(--verde-saude);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-weight: 700;
+    width: 100%;
+    cursor: pointer;
+    transition: transform 0.2s;
+    margin-top: 10px;
+}
+
+.btn-save:hover { 
+    transform: translateY(-2px); filter: brightness(1.1); 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   REFINAMENTO DASHBOARD PACIENTE
+   ========================================================================== */
+
+.welcome-section {
+    margin-bottom: 35px;
+}
+
+.welcome-text h1 {
+    font-size: 1.8rem;
+    color: var(--texto-escuro);
+    margin-bottom: 8px;
+}
+
+.welcome-text p {
+    color: var(--texto-suave);
+    font-size: 1rem;
+}
+
+/* Stats Cards */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.stat-card {
+    background: white;
+    padding: 25px;
+    border-radius: var(--borda-raio);
+    box-shadow: var(--sombra);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border: 1px solid #f0f0f0;
+}
+
+.stat-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+}
+
+.icon-green { background: #e8f5e9; }
+.icon-purple { background: #f3e5f5; }
+.icon-blue { background: #e3f2fd; }
+
+.stat-info { display: flex; flex-direction: column; }
+.stat-label { font-size: 0.8rem; color: var(--texto-suave); text-transform: uppercase; letter-spacing: 0.5px; }
+.stat-value { font-size: 1.1rem; font-weight: 700; color: var(--texto-escuro); margin-top: 3px; }
+.text-green { color: var(--verde-destaque); }
+
+/* Main Action Card (CTA) */
+.main-action-card {
+    /* Usando o seu Berinjela #4d2c5a como base sólida */
+    background-color: #4d2c5a; 
+    background: linear-gradient(135deg, var(--lilas-menu) 0%, #6a3d7d 100%);
+    
+    border-radius: var(--borda-raio);
+    padding: 40px;
+    margin-top: 20px;
+    box-shadow: 0 8px 20px rgba(77, 44, 90, 0.2);
+    
+    /* Garante que tudo dentro do card herde a cor branca */
+    color: #ffffff !important; 
+}
+
+.action-content {
+    position: relative;
+    z-index: 2;
+    max-width: 500px;
+}
+
+.action-text h2 {
+    color: #ffffff !important;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.action-text p {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 25px;
+}
+
+.btn-primary-action {
+    background-color: var(--verde-destaque) !important; /* #1abc9c */
+    color: white !important;
+    padding: 15px 35px;
+    border-radius: 30px;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.2s;
+    border: none;
+}
+
+.btn-primary-action:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+/* Elemento visual decorativo */
+.pulse-circle {
+    position: absolute;
+    right: -50px;
+    top: -50px;
+    width: 250px;
+    height: 250px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.support-mini-card {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--texto-suave);
+}
+
+.support-mini-card a { color: var(--cor-menu-fundo); font-weight: 700; text-decoration: none; }
+
+
+
+
+/* ==========================================================================
+   CORREÇÕES E REFINAMENTOS
+   ========================================================================== */
+
+/* Card Principal: Agora com fundo sólido para garantir visibilidade */
+.main-action-card {
+    background-color: #4d2c5a !important; /* Cor Berinjela Escolhida */
+    border-radius: var(--borda-raio);
+    padding: 40px;
+    margin-top: 20px;
+    color: #ffffff !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.main-action-card h2, .main-action-card p {
+    color: #ffffff !important;
+}
+
+/* Avatar com Bonequinho Genérico (CSS Puro) */
+.avatar-generic {
+    width: 80px;
+    height: 80px;
+    background-color: #f0f0f0;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid var(--lilas-foco);
+}
+
+/* Cabeça do bonequinho */
+.avatar-generic::before {
+    content: "";
+    width: 25px;
+    height: 25px;
+    background-color: #ccc;
+    border-radius: 50%;
+    position: absolute;
+    top: 15px;
+}
+
+/* Corpo do bonequinho */
+.avatar-generic::after {
+    content: "";
+    width: 50px;
+    height: 30px;
+    background-color: #ccc;
+    border-radius: 50% 50% 0 0;
+    position: absolute;
+    bottom: -5px;
+}
